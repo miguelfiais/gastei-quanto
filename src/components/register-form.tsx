@@ -15,13 +15,19 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { LoaderIcon } from 'lucide-react'
 import SignInGoogle from './signin-google'
 
 const formSchema = z.object({
+  name: z
+    .string({
+      required_error: 'O nome é obrigatório',
+    })
+    .min(3, {
+      message: 'O nome deve ter pelo menos 3 caracteres.',
+    }),
   email: z.string().email({
     message: 'Digite um email válido',
   }),
@@ -30,7 +36,7 @@ const formSchema = z.object({
   }),
 })
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const router = useRouter()
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
@@ -38,6 +44,7 @@ const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: '',
       email: '',
       password: '',
     },
@@ -45,19 +52,34 @@ const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    const res = await signIn<'credentials'>('credentials', {
-      ...values,
-      redirect: false,
+
+    const request = await fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
     })
-    if (res?.error) {
+
+    const response = await request.json()
+    const status = await request.status
+
+    if (status === 409) {
       toast({
-        description: res.error,
+        description: response.error,
         variant: 'destructive',
+        duration: 2000,
+      })
+    }
+    if (status === 201) {
+      toast({
+        description: 'Conta criada com sucesso',
+        variant: 'default',
         duration: 1000,
       })
-    } else {
-      router.push('/')
+      router.push('/login')
     }
+
     form.reset()
     setIsLoading(false)
   }
@@ -68,12 +90,25 @@ const LoginForm = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nome</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="shadcn" {...field} />
+                  <Input type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,7 +131,7 @@ const LoginForm = () => {
             {isLoading ? (
               <LoaderIcon className="h-4 w-4 animate-spin" />
             ) : (
-              'Entrar'
+              'Cadastrar'
             )}
           </Button>
         </form>
@@ -106,4 +141,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default RegisterForm
