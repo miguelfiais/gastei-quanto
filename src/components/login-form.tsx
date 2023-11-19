@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { useToast } from '@/components/ui/use-toast'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -16,6 +17,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { LoaderIcon } from 'lucide-react'
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,6 +31,8 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const router = useRouter()
+  const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,16 +43,22 @@ const LoginForm = () => {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true)
     const res = await signIn<'credentials'>('credentials', {
       ...values,
       redirect: false,
     })
     if (res?.error) {
-      console.log(res.error)
+      toast({
+        description: res.error,
+        variant: 'destructive',
+        duration: 1000,
+      })
     } else {
-      form.reset()
       router.push('/')
     }
+    form.reset()
+    setIsLoading(false)
   }
 
   return (
@@ -79,8 +90,12 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
-          Entrar
+        <Button className="w-full" type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <LoaderIcon className="h-4 w-4 animate-spin" />
+          ) : (
+            'Entrar'
+          )}
         </Button>
       </form>
     </Form>
