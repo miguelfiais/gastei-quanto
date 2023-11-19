@@ -3,7 +3,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from './db'
-import { User } from '@prisma/client'
 import bcrypt from 'bcrypt'
 
 export const authOptions: AuthOptions = {
@@ -23,7 +22,7 @@ export const authOptions: AuthOptions = {
         },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials): Promise<User | null> {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Dados de Login necessários')
         }
@@ -46,5 +45,8 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  session: {
+    strategy: 'jwt',
+  },
   secret: process.env.SECRET_KEY,
 }
