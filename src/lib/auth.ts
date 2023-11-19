@@ -32,14 +32,14 @@ export const authOptions: AuthOptions = {
           },
         })
         if (!user || !user.hashedPassword) {
-          return null
+          throw new Error('Usuário não registrado atráves de crendenciais')
         }
         const matchPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword,
         )
         if (!matchPassword) {
-          return null
+          throw new Error('Senha incorreta')
         }
         return user
       },
