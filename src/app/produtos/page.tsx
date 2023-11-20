@@ -1,7 +1,9 @@
 import Header from '@/components/header'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { getCurrentUser } from '@/lib/session'
+import { cn } from '@/lib/utils'
 import { fetchProducts } from '@/repositories/product'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 const ProductsPage = async () => {
@@ -22,7 +24,12 @@ const ProductsPage = async () => {
             Você ainda não tem nenhum produto cadastrado!
           </p>
         )}
-        <Button>Calcular novo produto</Button>
+        <Link
+          href={'/novo-produto'}
+          className={cn(buttonVariants({ variant: 'default' }))}
+        >
+          Calcular novo produto
+        </Link>
       </div>
     </>
   )
