@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 const Login = async () => {
   const user = await getCurrentUser()
   if (user) {
-    return redirect('/')
+    return redirect('/produtos')
   }
   return (
     <div className="container flex flex-grow flex-col items-center justify-center py-8">

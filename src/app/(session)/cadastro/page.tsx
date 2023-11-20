@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 const Register = async () => {
   const user = await getCurrentUser()
   if (user) {
-    return redirect('/')
+    return redirect('/produtos')
   }
 
   return (

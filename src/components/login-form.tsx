@@ -56,7 +56,7 @@ const LoginForm = () => {
         duration: 1000,
       })
     } else {
-      router.push('/')
+      router.push('/produtos')
     }
     form.reset()
     setIsLoading(false)
