@@ -15,6 +15,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Dispatch, SetStateAction } from 'react'
+import { IProductData } from './form-steps'
 
 const formSchema = z.object({
   name: z
@@ -34,10 +36,10 @@ const formSchema = z.object({
 })
 
 interface NewProductFormProps {
-  userEmail: string | undefined | null
+  setProductData: Dispatch<SetStateAction<IProductData | undefined>>
 }
 
-const NewProductForm = ({ userEmail }: NewProductFormProps) => {
+const NewProductForm = ({ setProductData }: NewProductFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,12 +49,12 @@ const NewProductForm = ({ userEmail }: NewProductFormProps) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    setProductData(values)
   }
 
   return (
-    <div>
-      <h2 className="mb-5 text-center text-3xl font-semibold">
+    <div className="w-full">
+      <h2 className="mb-5 text-center text-2xl font-semibold">
         Cadastrar Produto
       </h2>
       <Form {...form}>
@@ -64,7 +66,7 @@ const NewProductForm = ({ userEmail }: NewProductFormProps) => {
               <FormItem>
                 <FormLabel>Nome</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>
                   Nome do produto que será feito.
@@ -80,7 +82,7 @@ const NewProductForm = ({ userEmail }: NewProductFormProps) => {
               <FormItem>
                 <FormLabel>Quantidade</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>Quantidades do produto.</FormDescription>
                 <FormMessage />
