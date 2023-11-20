@@ -35,3 +35,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(error, { status: 500 })
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { id } = await request.json()
+    await prisma.ingredient.deleteMany({
+      where: {
+        productId: id,
+      },
+    })
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    })
+    return NextResponse.json('Ok', { status: 200 })
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 })
+  }
+}
