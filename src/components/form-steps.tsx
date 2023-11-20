@@ -47,8 +47,9 @@ const FormSteps = ({ userEmail }: FormStepsProps) => {
       },
       body: JSON.stringify({ productData, ingredientData, userEmail }),
     })
+    const response = await request.json()
     if (request.status === 201) {
-      router.push('/produtos')
+      router.push(`/produtos/${response.id}`)
     } else {
       toast({
         description: 'Erro ao cadastrar produto',
