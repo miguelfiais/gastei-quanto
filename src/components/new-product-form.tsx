@@ -82,7 +82,7 @@ const NewProductForm = ({ setProductData }: NewProductFormProps) => {
               <FormItem>
                 <FormLabel>Quantidade</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="number" {...field} />
                 </FormControl>
                 <FormDescription>Quantidades do produto.</FormDescription>
                 <FormMessage />

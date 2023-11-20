@@ -93,7 +93,7 @@ const NewIngredientForm = ({ addIngredient }: NewIngredientFormProps) => {
               <FormItem>
                 <FormLabel>Preço</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -106,7 +106,7 @@ const NewIngredientForm = ({ addIngredient }: NewIngredientFormProps) => {
               <FormItem>
                 <FormLabel>Quantidade</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -119,7 +119,7 @@ const NewIngredientForm = ({ addIngredient }: NewIngredientFormProps) => {
               <FormItem>
                 <FormLabel>Quantidade de uso</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
