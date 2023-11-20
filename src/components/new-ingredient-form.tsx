@@ -62,7 +62,7 @@ const NewIngredientForm = ({ addIngredient }: NewIngredientFormProps) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    addIngredient(values)
+    addIngredient({ id: Math.random(), ...values })
     form.reset()
   }
 

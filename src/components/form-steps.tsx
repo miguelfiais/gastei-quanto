@@ -7,6 +7,7 @@ import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { LoaderIcon } from 'lucide-react'
+import AddedIngredients from './added-ingredients'
 
 export interface IProductData {
   name: string
@@ -14,6 +15,7 @@ export interface IProductData {
 }
 
 export interface IIngredientData {
+  id: number
   name: string
   price: string
   quantity: string
@@ -63,10 +65,14 @@ const FormSteps = ({ userEmail }: FormStepsProps) => {
     <>
       {productData ? (
         <div className="flex w-full max-w-sm flex-grow flex-col gap-14">
-          <div className="text-sm font-medium">
-            <p className="capitalize text-primary">{productData.name}</p>
-            <p>Unidades: {productData.quantity}</p>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium">
+              <p className="capitalize text-primary">{productData.name}</p>
+              <p>Unidades: {productData.quantity}</p>
+            </div>
+            <AddedIngredients ingredients={ingredientData} />
           </div>
+
           <div className="flex flex-col items-center gap-6">
             <NewIngredientForm addIngredient={addIngredient} />
             <Button
