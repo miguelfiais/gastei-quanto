@@ -4,6 +4,9 @@ import { useState } from 'react'
 import NewIngredientForm from './new-ingredient-form'
 import NewProductForm from './new-product-form'
 import { Button } from './ui/button'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/ui/use-toast'
+import { LoaderIcon } from 'lucide-react'
 
 export interface IProductData {
   name: string
@@ -24,12 +27,17 @@ interface FormStepsProps {
 const FormSteps = ({ userEmail }: FormStepsProps) => {
   const [productData, setProductData] = useState<IProductData>()
   const [ingredientData, setIngredientData] = useState<IIngredientData[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const addIngredient = (data: IIngredientData) => {
     setIngredientData((prev) => [...prev, data])
   }
 
+  const router = useRouter()
+  const { toast } = useToast()
+
   const createProduct = async () => {
+    setIsLoading(true)
     const request = await fetch('/api/product', {
       method: 'POST',
       headers: {
@@ -37,7 +45,18 @@ const FormSteps = ({ userEmail }: FormStepsProps) => {
       },
       body: JSON.stringify({ productData, ingredientData, userEmail }),
     })
-    console.log(request)
+    if (request.status === 201) {
+      router.push('/produtos')
+    } else {
+      toast({
+        description: 'Erro ao cadastrar produto',
+        variant: 'destructive',
+        duration: 2000,
+      })
+      setProductData(undefined)
+      setIngredientData([])
+    }
+    setIsLoading(false)
   }
 
   return (
@@ -54,8 +73,13 @@ const FormSteps = ({ userEmail }: FormStepsProps) => {
               variant={'secondary'}
               className="w-full"
               onClick={createProduct}
+              disabled={isLoading || ingredientData.length === 0}
             >
-              Finalizar
+              {isLoading ? (
+                <LoaderIcon className="h-4 w-4 animate-spin" />
+              ) : (
+                'Finalizar'
+              )}
             </Button>
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-muted-foreground"></div>
