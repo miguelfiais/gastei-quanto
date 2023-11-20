@@ -10,8 +10,35 @@ export interface IProductData {
   quantity: string
 }
 
-const FormSteps = () => {
-  const [productData, setProductData] = useState<IProductData | undefined>()
+export interface IIngredientData {
+  name: string
+  price: string
+  quantity: string
+  quantityUsed: string
+}
+
+interface FormStepsProps {
+  userEmail: string | undefined | null
+}
+
+const FormSteps = ({ userEmail }: FormStepsProps) => {
+  const [productData, setProductData] = useState<IProductData>()
+  const [ingredientData, setIngredientData] = useState<IIngredientData[]>([])
+
+  const addIngredient = (data: IIngredientData) => {
+    setIngredientData((prev) => [...prev, data])
+  }
+
+  const createProduct = async () => {
+    const request = await fetch('/api/product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productData, ingredientData, userEmail }),
+    })
+    console.log(request)
+  }
 
   return (
     <>
@@ -22,8 +49,12 @@ const FormSteps = () => {
             <p>Unidades: {productData.quantity}</p>
           </div>
           <div className="flex flex-col items-center gap-6">
-            <NewIngredientForm />
-            <Button variant={'secondary'} className="w-full">
+            <NewIngredientForm addIngredient={addIngredient} />
+            <Button
+              variant={'secondary'}
+              className="w-full"
+              onClick={createProduct}
+            >
               Finalizar
             </Button>
             <div className="flex items-center gap-2">

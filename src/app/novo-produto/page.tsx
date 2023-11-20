@@ -12,7 +12,7 @@ const NewProduct = async () => {
     <>
       <Header user={user} />
       <div className="container flex flex-grow flex-col items-center justify-center py-4">
-        <FormSteps />
+        <FormSteps userEmail={user.email} />
       </div>
     </>
   )

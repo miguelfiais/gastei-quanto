@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { IIngredientData } from './form-steps'
 
 const formSchema = z.object({
   name: z
@@ -45,8 +46,11 @@ const formSchema = z.object({
       message: 'Digite pelo menos 1 caracter',
     }),
 })
+interface NewIngredientFormProps {
+  addIngredient: (data: IIngredientData) => void
+}
 
-const NewIngredientForm = () => {
+const NewIngredientForm = ({ addIngredient }: NewIngredientFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,7 +62,8 @@ const NewIngredientForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    addIngredient(values)
+    form.reset()
   }
 
   return (
