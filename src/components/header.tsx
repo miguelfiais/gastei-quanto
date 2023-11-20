@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react'
 import { Button } from './ui/button'
+import Link from 'next/link'
 
 interface HeaderProps {
   user: {
@@ -17,7 +18,9 @@ const Header = ({ user }: HeaderProps) => {
 
   return (
     <header className="container flex items-center justify-between py-4">
-      <p>{user.name}</p>
+      <Link href={'/produtos'} className="text-sm font-medium">
+        {user.name}
+      </Link>
       <Button variant={'link'} onClick={logout}>
         Sair
       </Button>
