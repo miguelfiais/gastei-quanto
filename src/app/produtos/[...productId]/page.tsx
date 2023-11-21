@@ -1,10 +1,10 @@
 import Header from '@/components/header'
+import IngredientCard from '@/components/ingredient-card'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { calculateCost } from '@/helpers/ingredientCost'
 import prisma from '@/lib/db'
 import { getCurrentUser } from '@/lib/session'
-import { PenIcon, TrashIcon } from 'lucide-react'
 import { redirect } from 'next/navigation'
 
 interface ProductProps {
@@ -38,7 +38,7 @@ const Product = async ({ params }: ProductProps) => {
       <Header user={user} />
       <div className="container flex-grow py-4">
         <div className="flex flex-col items-center">
-          <h2 className="text-xl font-semibold text-primary">
+          <h2 className="text-xl font-semibold capitalize text-primary">
             {product?.name}
           </h2>
           <p className="text-sm">Unidades: {product?.quantity}</p>
@@ -46,19 +46,10 @@ const Product = async ({ params }: ProductProps) => {
         <ScrollArea className="h-[50vh] py-8">
           <div className="flex flex-col gap-3">
             {product?.ingredients.map((ingredient) => (
-              <Card key={ingredient.id}>
-                <CardHeader className="flex-row items-center justify-between p-3">
-                  <button>
-                    <PenIcon className="h-4 w-4" />
-                  </button>
-                  <p className="text-sm font-medium capitalize">
-                    {ingredient.name}
-                  </p>
-                  <button>
-                    <TrashIcon className="h-4 w-4 text-destructive" />
-                  </button>
-                </CardHeader>
-              </Card>
+              <IngredientCard
+                key={ingredient.id}
+                ingredient={calculateCost(ingredient)}
+              />
             ))}
           </div>
         </ScrollArea>

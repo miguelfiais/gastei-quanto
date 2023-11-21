@@ -1,6 +1,6 @@
 import { Ingredient } from '@prisma/client'
 
-interface IngredientWithCost extends Ingredient {
+export interface IngredientWithCost extends Ingredient {
   cost: number
 }
 export const calculateCost = (ingredient: Ingredient): IngredientWithCost => {
