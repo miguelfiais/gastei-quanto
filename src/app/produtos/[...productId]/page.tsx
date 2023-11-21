@@ -33,6 +33,13 @@ const Product = async ({ params }: ProductProps) => {
 
   if (!product) redirect('/produtos')
 
+  const totalCost = product.ingredients.reduce(
+    (acc, ingredient) => acc + calculateCost(ingredient).cost,
+    0,
+  )
+
+  const unitCost = totalCost / product.quantity
+
   return (
     <>
       <Header user={user} />
@@ -54,8 +61,8 @@ const Product = async ({ params }: ProductProps) => {
           </div>
         </ScrollArea>
         <div className="py-4">
-          <p>Custo da unidade: R$ 0,60</p>
-          <p>Custo total: R$ 32,00</p>
+          <p>Custo da unidade: R$ {unitCost.toFixed(2)}</p>
+          <p>Custo total: R$ {totalCost.toFixed(2)}</p>
         </div>
         <Button variant={'outline'} className="w-full">
           Adicionar mais ingrediente
