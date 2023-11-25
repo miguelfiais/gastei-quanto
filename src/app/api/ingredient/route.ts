@@ -28,3 +28,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(error, { status: 500 })
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { id } = await request.json()
+    await prisma.ingredient.delete({
+      where: { id },
+    })
+    return NextResponse.json({ status: 200 })
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 })
+  }
+}
