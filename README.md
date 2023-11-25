@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Gastei quanto?</h1>
 
-## Getting Started
+<div align="center"> 
 
-First, run the development server:
+[Visão Geral](#visão-geral)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+[Feito com](#feito-com)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+[Como rodar](#como-rodar)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+[Contato](#contato)
+  
+</div>
+
+## Visão Geral
+
+[Aplicação](https://gastei-quanto.vercel.app/)
+
+<div align="center">
+  
+ ![session](https://github.com/miguelfiais/gastei-quanto/assets/108070001/c5e8beb7-b707-46f1-abad-f8b8526d6be5)
+ ![forms](https://github.com/miguelfiais/gastei-quanto/assets/108070001/3b502ea3-910c-488f-8f84-7c4a4ef9d4eb)
+ ![products](https://github.com/miguelfiais/gastei-quanto/assets/108070001/5b3f7db7-2128-4744-8edf-6fa9dd69a6d4)
+  
+</div>
+
+
+Desenvolvido para simplificar o processo de cálculo de custos para empreendedores que produzem e vendem produtos. 
+
+- Autenticação com NextAuth.js 
+- Inserir o nome do produto que deseja criar, a quantidade que pretende produzir
+- Para cada ingrediente, o usuário fornece o valor de compra, a quantidade total adquirida e a quantidade que será utilizada na produção do produto.
+- Com base nessas informações, realizamos automaticamente os cálculos, fornecendo ao usuário o custo total dos ingredientes necessários para a produção da quantidade desejada do produto.
+
+
+### Feito com
+
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prisma](https://www.prisma.io/)
+- [NextAuth](https://next-auth.js.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+
+## Como rodar
+
+Para clonar e executar este aplicativo, você precisará de [Git](https://git-scm.com) e [Node.js](https://nodejs.org/en/download/) (que vem com [npm](http://npmjs.com)) instalado em seu computador. Na sua linha de comando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone este repositório
+$ git clone https://github.com/miguelfiais/gastei-quanto.git
+
+# Acesse a pasta do projeto
+$ cd gastei-quanto
+
+# Instale as dependências
+$ npm install
+
+# Execute o aplicativo
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contato
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- GitHub [miguelfiais](https://github.com/miguelfiais)
+- Linkedin [miguelfiais](https://www.linkedin.com/in/miguel-fiais/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Feito com ♥ por Miguel Fiais
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
