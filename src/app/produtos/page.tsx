@@ -18,7 +18,7 @@ const ProductsPage = async () => {
   return (
     <>
       <Header user={user} />
-      <div className="container flex flex-grow flex-col items-center justify-center gap-4">
+      <div className="container flex flex-grow flex-col items-center justify-center gap-4 py-4">
         {products.length ? (
           <ScrollArea className="h-[75vh] w-full max-w-xs">
             <div className="flex flex-col gap-3">
