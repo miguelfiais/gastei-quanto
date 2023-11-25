@@ -1,6 +1,6 @@
+import AddIngredientButton from '@/components/add-ingredient-button'
 import Header from '@/components/header'
 import IngredientCard from '@/components/ingredient-card'
-import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { calculateCost } from '@/helpers/ingredientCost'
 import prisma from '@/lib/db'
@@ -64,9 +64,7 @@ const Product = async ({ params }: ProductProps) => {
           <p>Custo da unidade: R$ {unitCost.toFixed(2)}</p>
           <p>Custo total: R$ {totalCost.toFixed(2)}</p>
         </div>
-        <Button variant={'outline'} className="w-full">
-          Adicionar mais ingrediente
-        </Button>
+        <AddIngredientButton productId={params.productId[0]} />
       </div>
     </>
   )
