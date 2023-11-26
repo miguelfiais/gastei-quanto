@@ -53,7 +53,7 @@ export default function Home() {
             alt="como functiona o aplicativo"
             width={387}
             height={166}
-            className="mt-4"
+            className="mt-4 self-center"
           />
           <p className="mt-3 text-center text-sm text-muted-foreground">
             Com base nessas informações, o aplicativo realiza automaticamente os
