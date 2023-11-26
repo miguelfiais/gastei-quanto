@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Benefits from '@/components/benefits'
 import Operation from '@/components/operation'
 import { buttonVariants } from '@/components/ui/button'
@@ -29,7 +30,7 @@ export default function Home() {
           Começar agora
         </Link>
       </main>
-      <div className="bg-effect-blur flex w-full flex-col bg-top bg-no-repeat pt-12">
+      <div className="flex w-full flex-col bg-effect-blur bg-top bg-no-repeat pt-12">
         <Image
           src={'/demo.png'}
           alt="demonstracao do aplicativo"
