@@ -11,7 +11,7 @@ const Operation = () => {
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Badge>1º Passo</Badge>
             <span className="text-sm">Definir produto.</span>
           </div>
@@ -23,7 +23,7 @@ const Operation = () => {
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Badge> 2º Passo</Badge>
             <span className="text-sm">Listar os ingredientes</span>
           </div>
