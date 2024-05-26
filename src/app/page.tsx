@@ -9,14 +9,15 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className="flex flex-grow flex-col items-center py-8">
-      <main className="container flex flex-col items-center text-center">
-        <h2 className="text-lg font-medium uppercase text-primary">
+      <div className='container lg:flex items-center justify-between'>
+      <main className="flex flex-col items-center text-center lg:text-left lg:items-start lg:max-w-xl">
+        <h2 className="text-lg font-medium uppercase text-primary md:text-xl lg:text-2xl">
           Gastei quanto?
         </h2>
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-bold md:text-3xl lg:text-4xl">
           Leve sua gestão de custos ao próximo nível
         </h1>
-        <p className="mt-3 text-sm text-muted-foreground">
+        <p className="mt-3 text-md text-muted-foreground md:text-base lg:text-lg">
           Desenvolvido para simplificar o processo de cálculo de custos para
           empreendedores que produzem e vendem produtos.
         </p>
@@ -24,20 +25,21 @@ export default function Home() {
           href={'/login'}
           className={cn(
             buttonVariants({ variant: 'default', size: 'lg' }),
-            'mt-4',
+            'mt-4 md:text-base lg:text-lg',
           )}
         >
           Começar agora
         </Link>
       </main>
-      <div className="flex w-full flex-col bg-effect-blur bg-top bg-no-repeat pt-12">
+      <div className="flex w-full flex-col bg-effect-blur bg-top bg-no-repeat pt-12 lg:bg-none">
         <Image
           src={'/demo.png'}
           alt="demonstracao do aplicativo"
           width={460}
           height={637}
-          className="self-end pl-5"
+          className="self-end pl-5 sm:self-center lg:w-3/6"
         />
+      </div>
       </div>
       <section className="container flex flex-col pt-8">
         <h3 className="text-center text-base font-medium uppercase text-primary">
